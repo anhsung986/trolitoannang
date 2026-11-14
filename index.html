@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trở Lí Toàn Năng - Discord Bot</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #05050a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: #4f46e5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 16px;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-invite {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 12px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Main Hero */
+        main {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #34d399;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #ffffff, #e0e7ff, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 40px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .stat-card {
+            background: rgba(13, 15, 29, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .stat-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #818cf8;
+            margin-bottom: 4px;
+        }
+
+        .stat-num.emerald { color: #34d399; }
+
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Features Section */
+        section {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            font-size: 0.85rem;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .feature-card {
+            background: rgba(13, 15, 29, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 24px;
+            border-radius: 16px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        .icon-red { background: rgba(239, 68, 68, 0.1); color: #f87171; }
+        .icon-indigo { background: rgba(99, 102, 241, 0.1); color: #818cf8; }
+        .icon-emerald { background: rgba(16, 185, 129, 0.1); color: #34d399; }
+
+        .feature-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #f1f5f9;
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+
+        /* Commands Box */
+        .commands-box {
+            background: rgba(13, 15, 29, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .commands-box h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .pill {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #c7d2fe;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 11px;
+            color: #64748b;
+            background: rgba(5, 5, 10, 0.8);
+        }
+
+        @media(min-width: 768px) {
+            h1 { font-size: 3rem; }
+            .features-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-icon">🤖</div>
+            <span class="logo-text">Trở Lí Toàn Năng</span>
+        </div>
+        <!-- THAY LINK OAUTH2 CỦA BẠN VÀO ĐÂY -->
+        <a href="https://discord.com/oauth2/authorize?client_id=1571084479647191170" target="_blank" class="btn-invite">
+            <i class="fa-solid fa-plus"></i> Mời Bot
+        </a>
+    </header>
+
+    <main>
+        <div class="badge">
+            <span class="dot"></span>
+            HOẠT ĐỘNG 24/7 • 36 LỆNH SẴN SÀNG
+        </div>
+
+        <h1>Trợ Lý Quản Trị Đỉnh Cao Cho Discord</h1>
+        <p>Hệ thống kiểm duyệt thông minh, hòm thư góp ý, bảng nhận role tương tác, chống raid cấp tốc và vô vàn tiện ích giúp cộng đồng phát triển.</p>
+
+        <div class="hero-btns">
+            <!-- THAY LINK OAUTH2 CỦA BẠN VÀO ĐÂY -->
+            <a href="https://discord.com/oauth2/authorize?client_id=1571084479647191170" target="_blank" class="btn-primary">
+                <i class="fa-brands fa-discord" style="font-size: 18px;"></i> Thêm vào Server
+            </a>
+            <a href="#features" class="btn-secondary">Tính năng</a>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-num">36+</div>
+                <div class="stat-label">Lệnh Slash</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">100%</div>
+                <div class="stat-label">Ổn định</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num emerald">24/7</div>
+                <div class="stat-label">Online</div>
+            </div>
+        </div>
+    </main>
+
+    <section id="features">
+        <div class="section-title">
+            <h2>Tính năng toàn diện</h2>
+            <p>Mọi công cụ bạn cần để quản lý và giải trí trong một bot duy nhất.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon icon-red"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Kiểm duyệt tối ưu</h3>
+                <p>Hệ thống Ban, Kick, Mute, Lockdown khẩn cấp phòng chống Raid và lệnh Nuke làm sạch kênh nhanh chóng.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon icon-indigo"><i class="fa-solid fa-people-group"></i></div>
+                <h3>Tương tác cộng đồng</h3>
+                <p>Bảng role-reaction nút bấm, hòm thư góp ý /suggest, chế độ vắng mặt /afk và phục hồi tin nhắn /snipe.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon icon-emerald"><i class="fa-solid fa-gamepad"></i></div>
+                <h3>Tiện ích & Giải trí</h3>
+                <p>Tạo chữ ASCII nghệ thuật, tra cứu thời tiết, dịch ngôn ngữ, tạo câu đố và minigame vui nhộn.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="commands-box">
+            <h3>Các lệnh quản trị nổi bật</h3>
+            <p style="margin: 0 auto 15px auto;">Thiết kế dưới dạng lệnh Slash (/) gọn gàng, trực quan cho quản trị viên.</p>
+            
+            <div class="pills-container">
+                <span class="pill">/admin ban</span>
+                <span class="pill">/admin mute</span>
+                <span class="pill">/lockdown</span>
+                <span class="pill">/role-reaction</span>
+                <span class="pill">/suggest</span>
+                <span class="pill">/snipe</span>
+                <span class="pill">/nuke</span>
+            </div>
+
+            <!-- THAY LINK OAUTH2 CỦA BẠN VÀO ĐÂY -->
+            <a href="YOUR_DISCORD_OAUTH2_INVITE_LINK" target="_blank" style="color: #818cf8; text-decoration: none; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px;">
+                Trải nghiệm ngay <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; Trở Lí Toàn Năng. Vận hành trực tiếp trên Android/Termux.</p>
+    </footer>
+
+</body>
+</html>
